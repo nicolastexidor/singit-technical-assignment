@@ -15,7 +15,7 @@ const OPTION_COUNT = 4;
 
 export interface SelectWordsParams {
   userId: string;
-  sourceLanguage: string;
+  learningLanguage: string;
   limit: number;
   statuses: VocabStatus[];
 }
@@ -31,7 +31,7 @@ export class ExerciseService {
 
   async selectWords(params: SelectWordsParams): Promise<WordInsightDocument[]> {
     const vocabEntries = await this.vocabModel
-      .find({ userId: params.userId, language: params.sourceLanguage, status: { $in: params.statuses } })
+      .find({ userId: params.userId, language: params.learningLanguage, status: { $in: params.statuses } })
       .lean();
 
     const vocabMap = new Map(vocabEntries.map((v) => [String(v.wordInsightId), v]));
@@ -40,7 +40,7 @@ export class ExerciseService {
 
     if (vocabEntries.length > 0) {
       candidates = await this.insightModel
-        .find({ _id: { $in: vocabEntries.map((v) => v.wordInsightId) }, language: params.sourceLanguage })
+        .find({ _id: { $in: vocabEntries.map((v) => v.wordInsightId) }, language: params.learningLanguage })
         .lean() as unknown as WordInsightDocument[];
     }
 
@@ -49,7 +49,7 @@ export class ExerciseService {
       const unseen = await this.insightModel
         .find({
           _id: { $nin: [...seenIds].map((id) => new Types.ObjectId(id)) },
-          language: params.sourceLanguage,
+          language: params.learningLanguage,
         })
         .sort({ frequency: -1 })
         .limit(params.limit * 2)
@@ -71,7 +71,7 @@ export class ExerciseService {
 
   async buildExercises(
     words: WordInsightDocument[],
-    translationLanguage: string,
+    nativeLanguage: string,
     exerciseTypes: ExerciseType[],
   ): Promise<Exercise[]> {
     const wordIds = new Set(words.map((w) => String(w._id)));
@@ -82,13 +82,13 @@ export class ExerciseService {
       })
       .sort({ frequency: -1 })
       .limit(50)
-      .lean() as unknown as WordInsightDocument[];
+      .lean() as WordInsightDocument[];
 
     const exercises: Exercise[] = [];
     let typeIndex = 0;
 
     for (const word of words) {
-      const translation = word.translations.find((t) => t.language === translationLanguage);
+      const translation = word.translations.find((t) => t.language === nativeLanguage);
       const availableTypes = exerciseTypes.filter((t) => {
         if ((t === 'word_meaning' || t === 'reverse_translation') && !translation) return false;
         if (t === 'word_to_image' && word.imageRefs.length === 0) return false;
@@ -100,7 +100,7 @@ export class ExerciseService {
       const type = availableTypes[typeIndex % availableTypes.length];
       typeIndex++;
 
-      const exercise = this.buildExercise(type, word, translationLanguage, distractorPool);
+      const exercise = this.buildExercise(type, word, nativeLanguage, distractorPool);
       if (exercise) exercises.push(exercise);
     }
 
@@ -110,25 +110,25 @@ export class ExerciseService {
   private buildExercise(
     type: ExerciseType,
     word: WordInsightDocument,
-    translationLanguage: string,
+    nativeLanguage: string,
     pool: WordInsightDocument[],
   ): Exercise | null {
-    if (type === 'word_meaning') return this.buildWordMeaning(word, translationLanguage, pool);
-    if (type === 'reverse_translation') return this.buildReverseTranslation(word, translationLanguage, pool);
+    if (type === 'word_meaning') return this.buildWordMeaning(word, nativeLanguage, pool);
+    if (type === 'reverse_translation') return this.buildReverseTranslation(word, nativeLanguage, pool);
     if (type === 'word_to_image') return this.buildWordToImage(word, pool);
     return null;
   }
 
   private buildWordMeaning(
     word: WordInsightDocument,
-    translationLanguage: string,
+    nativeLanguage: string,
     pool: WordInsightDocument[],
   ): Exercise | null {
-    const correct = word.translations.find((t) => t.language === translationLanguage);
+    const correct = word.translations.find((t) => t.language === nativeLanguage);
     if (!correct) return null;
 
     const distractors = pool
-      .map((w) => w.translations.find((t) => t.language === translationLanguage)?.text)
+      .map((w) => w.translations.find((t) => t.language === nativeLanguage)?.text)
       .filter((t): t is string => !!t && t !== correct.text)
       .slice(0, OPTION_COUNT - 1);
 
@@ -154,10 +154,10 @@ export class ExerciseService {
 
   private buildReverseTranslation(
     word: WordInsightDocument,
-    translationLanguage: string,
+    nativeLanguage: string,
     pool: WordInsightDocument[],
   ): Exercise | null {
-    const translation = word.translations.find((t) => t.language === translationLanguage);
+    const translation = word.translations.find((t) => t.language === nativeLanguage);
     if (!translation) return null;
 
     const distractorWords = pool

@@ -58,10 +58,10 @@ export class PracticeSession {
   userId: string;
 
   @Prop({ required: true })
-  sourceLanguage: string;
+  learningLanguage: string;
 
   @Prop({ required: true })
-  translationLanguage: string;
+  nativeLanguage: string;
 
   @Prop({ type: [ExerciseSchema], required: true })
   exercises: Exercise[];

@@ -7,11 +7,11 @@ import { VOCAB_STATUSES, EXERCISE_TYPES } from '../../common/constants';
 export class CreateSessionDto {
   @ApiProperty({ example: 'en' })
   @IsString()
-  sourceLanguage: string;
+  learningLanguage: string;
 
   @ApiProperty({ example: 'es' })
   @IsString()
-  translationLanguage: string;
+  nativeLanguage: string;
 
   @ApiPropertyOptional({ default: 10, maximum: 50 })
   @IsNumber()

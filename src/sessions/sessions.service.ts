@@ -28,7 +28,7 @@ export class SessionsService {
 
     const words = await this.exerciseService.selectWords({
       userId,
-      sourceLanguage: dto.sourceLanguage,
+      learningLanguage: dto.learningLanguage,
       limit,
       statuses,
     });
@@ -39,20 +39,20 @@ export class SessionsService {
 
     const exercises = await this.exerciseService.buildExercises(
       words,
-      dto.translationLanguage,
+      dto.nativeLanguage,
       exerciseTypes,
     );
 
     if (exercises.length === 0) {
       throw new BadRequestException(
-        `Could not generate exercises. Ensure translationLanguage "${dto.translationLanguage}" exists in word insights.`,
+        `Could not generate exercises. Ensure nativeLanguage "${dto.nativeLanguage}" exists in word insights.`,
       );
     }
 
     return this.sessionModel.create({
       userId,
-      sourceLanguage: dto.sourceLanguage,
-      translationLanguage: dto.translationLanguage,
+      learningLanguage: dto.learningLanguage,
+      nativeLanguage: dto.nativeLanguage,
       exercises,
       status: 'active',
     });
@@ -92,7 +92,7 @@ export class SessionsService {
       dto.userId,
       exercise.wordInsightId,
       insight?.normalizedWord ?? exercise.word,
-      insight?.language ?? session.sourceLanguage,
+      insight?.language ?? session.learningLanguage,
       isCorrect,
     );
 
@@ -125,8 +125,8 @@ export class SessionsService {
     return {
       sessionId,
       status: session.status,
-      sourceLanguage: session.sourceLanguage,
-      translationLanguage: session.translationLanguage,
+      learningLanguage: session.learningLanguage,
+      nativeLanguage: session.nativeLanguage,
       totalExercises: session.exercises.length,
       completedCount: session.exercises.filter((e) => e.answeredAt !== null).length,
       pendingCount: session.exercises.filter((e) => e.answeredAt === null).length,
