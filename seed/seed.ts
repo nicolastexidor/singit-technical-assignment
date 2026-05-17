@@ -184,7 +184,6 @@ const userVocabSeed: {
   { userId: 'user_001', normalizedWord: 'home',    status: 'known',    correctCount: 3, incorrectCount: 0 },
   { userId: 'user_001', normalizedWord: 'fire',    status: 'known',    correctCount: 3, incorrectCount: 1 },
   { userId: 'user_001', normalizedWord: 'darling', status: 'learning', correctCount: 1, incorrectCount: 2 },
-  { userId: 'user_001', normalizedWord: 'soul',    status: 'learning', correctCount: 2, incorrectCount: 1 },
   { userId: 'user_001', normalizedWord: 'brave',   status: 'learning', correctCount: 1, incorrectCount: 0 },
   { userId: 'user_001', normalizedWord: 'faith',   status: 'learning', correctCount: 0, incorrectCount: 1 },
   { userId: 'user_001', normalizedWord: 'light',   status: 'learning', correctCount: 1, incorrectCount: 1 },

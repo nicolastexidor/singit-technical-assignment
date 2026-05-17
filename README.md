@@ -35,7 +35,7 @@ Default values work out of the box. Edit `.env` to override:
 
 ```
 MONGO_URI=mongodb://localhost:27017/vocab_practice
-PORT=3000
+PORT=8080
 ```
 
 ### 4. Seed the database
@@ -58,8 +58,8 @@ Seeds 20 English word insights and vocabulary state for 3 test users:
 npm run start:dev
 ```
 
-Server: `http://localhost:3000`
-Swagger UI: `http://localhost:3000/api-docs`
+Server: `http://localhost:8080`
+Swagger UI: `http://localhost:8080/api-docs`
 
 ---
 

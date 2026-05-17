@@ -31,11 +31,11 @@ export class CreateSessionDto {
 
   @ApiPropertyOptional({
     type: [String],
-    enum: ['word_meaning', 'reverse_translation', 'word_to_image'],
+    enum: ['word_meaning', 'reverse_translation', 'word_to_image', 'translation_match'],
     default: ['word_meaning', 'reverse_translation'],
   })
   @IsArray()
-  @IsEnum(['word_meaning', 'reverse_translation', 'word_to_image'], { each: true })
+  @IsEnum(['word_meaning', 'reverse_translation', 'word_to_image', 'translation_match'], { each: true })
   @IsOptional()
   exerciseTypes?: ExerciseType[];
 }
