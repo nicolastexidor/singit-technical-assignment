@@ -13,11 +13,8 @@ const STATUS_WEIGHT: Record<VocabStatus, number> = {
   ignored: -10,
 };
 
-function score(status: VocabStatus, frequency: number, lastPracticedAt: Date | null): number {
-  const recencyPenalty = lastPracticedAt
-    ? Math.min((Date.now() - lastPracticedAt.getTime()) / (1000 * 60 * 60 * 24), 1.0)
-    : 0;
-  return STATUS_WEIGHT[status] + frequency * 0.1 - recencyPenalty;
+function score(status: VocabStatus, frequency: number): number {
+  return STATUS_WEIGHT[status] + frequency * 0.1;
 }
 
 const OPTION_COUNT = 4;
@@ -31,6 +28,8 @@ export interface SelectWordsParams {
 
 @Injectable()
 export class ExerciseService {
+  random: () => number = Math.random;
+
   constructor(
     @InjectModel(WordInsight.name) private readonly insightModel: Model<WordInsightDocument>,
     @InjectModel(UserVocabulary.name) private readonly vocabModel: Model<UserVocabularyDocument>,
@@ -68,8 +67,8 @@ export class ExerciseService {
       const va = vocabMap.get(String(a._id));
       const vb = vocabMap.get(String(b._id));
       return (
-        score(vb?.status ?? 'unknown', b.frequency, vb?.lastPracticedAt ?? null) -
-        score(va?.status ?? 'unknown', a.frequency, va?.lastPracticedAt ?? null)
+        score(vb?.status ?? 'unknown', b.frequency) -
+        score(va?.status ?? 'unknown', a.frequency)
       );
     });
 
@@ -145,7 +144,7 @@ export class ExerciseService {
     const options: ExerciseOption[] = shuffle([
       { id: correctId, text: correct.text },
       ...distractors.map((t) => ({ id: randomUUID(), text: t })),
-    ]);
+    ], this.random);
 
     return {
       id: randomUUID(),
@@ -178,7 +177,7 @@ export class ExerciseService {
     const options: ExerciseOption[] = shuffle([
       { id: correctId, text: word.word },
       ...distractorWords.map((w) => ({ id: randomUUID(), text: w })),
-    ]);
+    ], this.random);
 
     return {
       id: randomUUID(),
@@ -207,7 +206,7 @@ export class ExerciseService {
     const options: ExerciseOption[] = shuffle([
       { id: correctId, text: correctImage.alt ?? word.word, imageUrl: correctImage.url },
       ...distractorImages.map((img) => ({ id: randomUUID(), text: img.alt ?? '', imageUrl: img.url })),
-    ]);
+    ], this.random);
 
     return {
       id: randomUUID(),
@@ -222,10 +221,10 @@ export class ExerciseService {
   }
 }
 
-function shuffle<T>(arr: T[]): T[] {
+function shuffle<T>(arr: T[], random: () => number): T[] {
   const out = [...arr];
   for (let i = out.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(random() * (i + 1));
     [out[i], out[j]] = [out[j], out[i]];
   }
   return out;

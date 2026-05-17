@@ -99,13 +99,12 @@ Applied automatically after each exercise attempt:
 Words are ranked for practice by:
 
 ```
-score = statusWeight + (frequency × 0.1) − recencyPenalty
+score = statusWeight + (frequency × 0.1)
 
 statusWeight:   unknown=3, learning=2, known=0, ignored=−10
-recencyPenalty: min(hoursSinceLastPracticed / 24, 1.0)
 ```
 
-Unknown and learning words always surface before known ones. High-frequency words break ties. Recently practiced words are briefly deprioritized.
+Unknown and learning words always surface before known ones. High-frequency words break ties.
 
 ### Exercise types
 
@@ -154,3 +153,22 @@ src/
 seed/seed.ts                        — seeds 20 insights + 3 users
 docker-compose.yml                  — MongoDB container (alternative to docker run)
 ```
+
+---
+
+## Requirements Checklist
+
+- [x] **Import Word Insights** — upserts by `(normalizedWord, language)`, returns `created / updated / skipped / rejected` summary
+- [x] **Get Word Insights** — filters by language, source, difficulty, normalizedWord; supports pagination
+- [x] **Get User Word Insights** — merges global insights with vocab state, priority score, and recommendation reason
+- [x] **Update User Vocabulary** — PATCH endpoint returns the updated vocabulary entry
+- [x] **Get User Insight Summary** — status counts via aggregation, attempt stats, and recommended words
+- [x] **Create Practice Session** — configurable limit, source/translation language, statuses, and exercise types
+  - [x] `word_meaning` — show the word, pick the correct translation
+  - [x] `reverse_translation` — show a translation, pick the correct source word
+  - [x] `word_to_image` — show the word, pick the correct image
+- [x] **Submit Exercise Attempt** — records answer, returns correctness and previous/new vocabulary status
+- [x] **Get Practice Session Results** — completed/pending breakdown, correct/incorrect counts, latest vocab state per word
+- [x] **Indexes on common query fields** — `normalizedWord`, `userId`, `language`, `status`, `wordInsightId` all indexed
+- [x] **Clear schema and collection boundaries** — four collections with single responsibilities; exercises embedded in sessions
+- [x] **Deterministic prioritization and exercise generation** — pure scoring function; shuffle accepts injected random for testing
