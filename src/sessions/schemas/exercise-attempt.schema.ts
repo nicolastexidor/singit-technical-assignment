@@ -23,7 +23,7 @@ export class ExerciseAttempt {
 
   @Prop({
     type: String,
-    enum: ['word_meaning', 'reverse_translation', 'word_to_image', 'translation_match'],
+    enum: ['word_meaning', 'reverse_translation', 'word_to_image'],
     required: true,
   })
   exerciseType: ExerciseType;

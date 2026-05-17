@@ -8,7 +8,7 @@ const wordInsights = [
     translations: [{ language: 'es', text: 'cariño' }, { language: 'pt', text: 'querido' }],
     difficulty: 0.3, frequency: 12, source: 'song',
     songRefs: [{ songId: 'song_001', title: 'Perfect', occurrences: 3 }],
-    imageRefs: [{ id: 'img_001', url: 'https://picsum.photos/seed/darling/200', alt: 'A person looking affectionate' }],
+    imageRefs: [{ id: 'img_001', url: 'https://picsum.photos/seed/darling/400', alt: 'A person looking affectionate' }],
     examples: [{ text: 'Darling, just dive right in', translations: [{ language: 'es', text: 'Cariño, simplemente lánzate' }] }],
   },
   {
@@ -16,7 +16,7 @@ const wordInsights = [
     translations: [{ language: 'es', text: 'amor' }, { language: 'pt', text: 'amor' }],
     difficulty: 0.1, frequency: 35, source: 'song',
     songRefs: [{ songId: 'song_001', title: 'Perfect', occurrences: 5 }],
-    imageRefs: [{ id: 'img_002', url: 'https://picsum.photos/seed/love/200', alt: 'A heart symbol' }],
+    imageRefs: [{ id: 'img_002', url: 'https://picsum.photos/seed/love/400', alt: 'A heart symbol' }],
     examples: [{ text: 'We found love in a hopeless place', translations: [{ language: 'es', text: 'Encontramos amor en un lugar sin esperanza' }] }],
   },
   {
@@ -24,7 +24,7 @@ const wordInsights = [
     translations: [{ language: 'es', text: 'alma' }, { language: 'pt', text: 'alma' }],
     difficulty: 0.3, frequency: 18, source: 'song',
     songRefs: [{ songId: 'song_002', title: 'Thinking Out Loud', occurrences: 2 }],
-    imageRefs: [{ id: 'img_003', url: 'https://picsum.photos/seed/soul/200', alt: 'A glowing spirit' }],
+    imageRefs: [{ id: 'img_003', url: 'https://picsum.photos/seed/soul/400', alt: 'A glowing spirit' }],
     examples: [],
   },
   {
@@ -32,7 +32,7 @@ const wordInsights = [
     translations: [{ language: 'es', text: 'valiente' }, { language: 'pt', text: 'corajoso' }],
     difficulty: 0.3, frequency: 10, source: 'song',
     songRefs: [{ songId: 'song_003', title: 'Brave', occurrences: 4 }],
-    imageRefs: [{ id: 'img_004', url: 'https://picsum.photos/seed/brave/200', alt: 'A lion' }],
+    imageRefs: [{ id: 'img_004', url: 'https://picsum.photos/seed/brave/400', alt: 'A lion' }],
     examples: [{ text: 'Say what you wanna say', translations: [{ language: 'es', text: 'Di lo que quieras decir' }] }],
   },
   {
@@ -40,7 +40,7 @@ const wordInsights = [
     translations: [{ language: 'es', text: 'asombro' }, { language: 'pt', text: 'maravilha' }],
     difficulty: 0.5, frequency: 8, source: 'song',
     songRefs: [{ songId: 'song_004', title: 'Wonder', occurrences: 2 }],
-    imageRefs: [{ id: 'img_005', url: 'https://picsum.photos/seed/wonder/200', alt: 'Stars in the night sky' }],
+    imageRefs: [{ id: 'img_005', url: 'https://picsum.photos/seed/wonder/400', alt: 'Stars in the night sky' }],
     examples: [],
   },
   {
@@ -48,7 +48,7 @@ const wordInsights = [
     translations: [{ language: 'es', text: 'fe' }, { language: 'pt', text: 'fé' }],
     difficulty: 0.3, frequency: 14, source: 'song',
     songRefs: [{ songId: 'song_005', title: 'Faith', occurrences: 6 }],
-    imageRefs: [{ id: 'img_006', url: 'https://picsum.photos/seed/faith/200', alt: 'A candle in the dark' }],
+    imageRefs: [{ id: 'img_006', url: 'https://picsum.photos/seed/faith/400', alt: 'A candle in the dark' }],
     examples: [{ text: 'I gotta have faith', translations: [{ language: 'es', text: 'Tengo que tener fe' }] }],
   },
   {
@@ -56,7 +56,7 @@ const wordInsights = [
     translations: [{ language: 'es', text: 'gloria' }, { language: 'pt', text: 'glória' }],
     difficulty: 0.5, frequency: 6, source: 'song',
     songRefs: [{ songId: 'song_006', title: 'Glory Days', occurrences: 3 }],
-    imageRefs: [{ id: 'img_007', url: 'https://picsum.photos/seed/glory/200', alt: 'A golden trophy' }],
+    imageRefs: [{ id: 'img_007', url: 'https://picsum.photos/seed/glory/400', alt: 'A golden trophy' }],
     examples: [],
   },
   {
@@ -64,7 +64,7 @@ const wordInsights = [
     translations: [{ language: 'es', text: 'sueño' }, { language: 'pt', text: 'sonho' }],
     difficulty: 0.1, frequency: 28, source: 'song',
     songRefs: [{ songId: 'song_007', title: 'Dream On', occurrences: 4 }],
-    imageRefs: [{ id: 'img_008', url: 'https://picsum.photos/seed/dream/200', alt: 'A sleeping person with stars' }],
+    imageRefs: [{ id: 'img_008', url: 'https://picsum.photos/seed/dream/400', alt: 'A sleeping person with stars' }],
     examples: [{ text: 'I have a dream', translations: [{ language: 'es', text: 'Tengo un sueño' }] }],
   },
   {
@@ -72,7 +72,7 @@ const wordInsights = [
     translations: [{ language: 'es', text: 'fuego' }, { language: 'pt', text: 'fogo' }],
     difficulty: 0.1, frequency: 22, source: 'song',
     songRefs: [{ songId: 'song_008', title: 'Light My Fire', occurrences: 5 }],
-    imageRefs: [{ id: 'img_009', url: 'https://picsum.photos/seed/fire/200', alt: 'Flames' }],
+    imageRefs: [{ id: 'img_009', url: 'https://picsum.photos/seed/fire/400', alt: 'Flames' }],
     examples: [],
   },
   {
@@ -80,7 +80,7 @@ const wordInsights = [
     translations: [{ language: 'es', text: 'gracia' }, { language: 'pt', text: 'graça' }],
     difficulty: 0.5, frequency: 9, source: 'song',
     songRefs: [{ songId: 'song_009', title: 'Amazing Grace', occurrences: 7 }],
-    imageRefs: [{ id: 'img_010', url: 'https://picsum.photos/seed/grace/200', alt: 'A dancer in motion' }],
+    imageRefs: [{ id: 'img_010', url: 'https://picsum.photos/seed/grace/400', alt: 'A dancer in motion' }],
     examples: [{ text: 'Amazing grace, how sweet the sound', translations: [{ language: 'es', text: 'Gracia asombrosa, qué dulce el sonido' }] }],
   },
   {
@@ -88,7 +88,7 @@ const wordInsights = [
     translations: [{ language: 'es', text: 'corazón' }, { language: 'pt', text: 'coração' }],
     difficulty: 0.1, frequency: 40, source: 'song',
     songRefs: [{ songId: 'song_010', title: 'Heart of Gold', occurrences: 6 }],
-    imageRefs: [{ id: 'img_011', url: 'https://picsum.photos/seed/heart/200', alt: 'A beating heart' }],
+    imageRefs: [{ id: 'img_011', url: 'https://picsum.photos/seed/heart/400', alt: 'A beating heart' }],
     examples: [{ text: "Don't go breaking my heart", translations: [{ language: 'es', text: 'No me rompas el corazón' }] }],
   },
   {
@@ -96,7 +96,7 @@ const wordInsights = [
     translations: [{ language: 'es', text: 'hogar' }, { language: 'pt', text: 'lar' }],
     difficulty: 0.1, frequency: 32, source: 'song',
     songRefs: [{ songId: 'song_011', title: 'Take Me Home', occurrences: 8 }],
-    imageRefs: [{ id: 'img_012', url: 'https://picsum.photos/seed/home/200', alt: 'A cozy house' }],
+    imageRefs: [{ id: 'img_012', url: 'https://picsum.photos/seed/home/400', alt: 'A cozy house' }],
     examples: [{ text: 'Take me home, country roads', translations: [{ language: 'es', text: 'Llévame a casa, caminos del campo' }] }],
   },
   {
@@ -104,7 +104,7 @@ const wordInsights = [
     translations: [{ language: 'es', text: 'cielo' }, { language: 'pt', text: 'céu' }],
     difficulty: 0.1, frequency: 20, source: 'song',
     songRefs: [{ songId: 'song_012', title: 'Lucy in the Sky', occurrences: 3 }],
-    imageRefs: [{ id: 'img_013', url: 'https://picsum.photos/seed/sky/200', alt: 'A blue sky with clouds' }],
+    imageRefs: [{ id: 'img_013', url: 'https://picsum.photos/seed/sky/400', alt: 'A blue sky with clouds' }],
     examples: [],
   },
   {
@@ -112,7 +112,7 @@ const wordInsights = [
     translations: [{ language: 'es', text: 'luz' }, { language: 'pt', text: 'luz' }],
     difficulty: 0.2, frequency: 25, source: 'song',
     songRefs: [{ songId: 'song_013', title: 'Blinding Lights', occurrences: 4 }],
-    imageRefs: [{ id: 'img_014', url: 'https://picsum.photos/seed/light/200', alt: 'A bright light' }],
+    imageRefs: [{ id: 'img_014', url: 'https://picsum.photos/seed/light/400', alt: 'A bright light' }],
     examples: [{ text: 'You are the light of my life', translations: [{ language: 'es', text: 'Eres la luz de mi vida' }] }],
   },
   {
@@ -120,7 +120,7 @@ const wordInsights = [
     translations: [{ language: 'es', text: 'río' }, { language: 'pt', text: 'rio' }],
     difficulty: 0.2, frequency: 11, source: 'song',
     songRefs: [{ songId: 'song_014', title: 'Ol Man River', occurrences: 5 }],
-    imageRefs: [{ id: 'img_015', url: 'https://picsum.photos/seed/river/200', alt: 'A flowing river' }],
+    imageRefs: [{ id: 'img_015', url: 'https://picsum.photos/seed/river/400', alt: 'A flowing river' }],
     examples: [],
   },
   {
@@ -128,7 +128,7 @@ const wordInsights = [
     translations: [{ language: 'es', text: 'sombra' }, { language: 'pt', text: 'sombra' }],
     difficulty: 0.4, frequency: 7, source: 'song',
     songRefs: [{ songId: 'song_015', title: 'Me and My Shadow', occurrences: 2 }],
-    imageRefs: [{ id: 'img_016', url: 'https://picsum.photos/seed/shadow/200', alt: 'A shadow on the wall' }],
+    imageRefs: [{ id: 'img_016', url: 'https://picsum.photos/seed/shadow/400', alt: 'A shadow on the wall' }],
     examples: [{ text: 'Every shadow has a light behind it', translations: [{ language: 'es', text: 'Detrás de cada sombra hay una luz' }] }],
   },
   {

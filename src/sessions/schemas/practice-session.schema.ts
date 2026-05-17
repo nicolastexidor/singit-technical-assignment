@@ -3,7 +3,7 @@ import { HydratedDocument, Types } from 'mongoose';
 
 export type PracticeSessionDocument = HydratedDocument<PracticeSession>;
 
-export type ExerciseType = 'word_meaning' | 'reverse_translation' | 'word_to_image' | 'translation_match';
+export type ExerciseType = 'word_meaning' | 'reverse_translation' | 'word_to_image';
 export type SessionStatus = 'active' | 'completed';
 
 @Schema({ _id: false })
@@ -26,7 +26,7 @@ export class Exercise {
 
   @Prop({
     type: String,
-    enum: ['word_meaning', 'reverse_translation', 'word_to_image', 'translation_match'],
+    enum: ['word_meaning', 'reverse_translation', 'word_to_image'],
     required: true,
   })
   type: ExerciseType;

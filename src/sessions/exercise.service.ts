@@ -97,7 +97,7 @@ export class ExerciseService {
     for (const word of words) {
       const translation = word.translations.find((t) => t.language === translationLanguage);
       const availableTypes = exerciseTypes.filter((t) => {
-        if ((t === 'word_meaning' || t === 'reverse_translation' || t === 'translation_match') && !translation) return false;
+        if ((t === 'word_meaning' || t === 'reverse_translation') && !translation) return false;
         if (t === 'word_to_image' && word.imageRefs.length === 0) return false;
         return true;
       });
@@ -123,7 +123,6 @@ export class ExerciseService {
     if (type === 'word_meaning') return this.buildWordMeaning(word, translationLanguage, pool);
     if (type === 'reverse_translation') return this.buildReverseTranslation(word, translationLanguage, pool);
     if (type === 'word_to_image') return this.buildWordToImage(word, pool);
-    if (type === 'translation_match') return this.buildTranslationMatch(word, translationLanguage, pool);
     return null;
   }
 
@@ -187,39 +186,6 @@ export class ExerciseService {
       wordInsightId: word._id as Types.ObjectId,
       word: word.word,
       prompt: `Which word means "${translation.text}"?`,
-      options,
-      correctOptionId: correctId,
-      answeredAt: null,
-    };
-  }
-
-  private buildTranslationMatch(
-    word: WordInsightDocument,
-    translationLanguage: string,
-    pool: WordInsightDocument[],
-  ): Exercise | null {
-    const correct = word.translations.find((t) => t.language === translationLanguage);
-    if (!correct) return null;
-
-    const distractorTranslations = pool
-      .map((w) => w.translations.find((t) => t.language === translationLanguage)?.text)
-      .filter((t): t is string => !!t && t !== correct.text)
-      .slice(0, OPTION_COUNT - 1);
-
-    if (distractorTranslations.length < OPTION_COUNT - 1) return null;
-
-    const correctId = randomUUID();
-    const options: ExerciseOption[] = shuffle([
-      { id: correctId, text: `${word.word} → ${correct.text}` },
-      ...distractorTranslations.map((t) => ({ id: randomUUID(), text: `${word.word} → ${t}` })),
-    ]);
-
-    return {
-      id: randomUUID(),
-      type: 'translation_match',
-      wordInsightId: word._id as Types.ObjectId,
-      word: word.word,
-      prompt: `Which option correctly pairs "${word.word}" with its translation?`,
       options,
       correctOptionId: correctId,
       answeredAt: null,
