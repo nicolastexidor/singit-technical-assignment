@@ -5,13 +5,7 @@ import { randomUUID } from 'crypto';
 import { WordInsight, WordInsightDocument } from '../insights/schemas/word-insight.schema';
 import { UserVocabulary, UserVocabularyDocument, VocabStatus } from '../users/schemas/user-vocabulary.schema';
 import { Exercise, ExerciseOption, ExerciseType } from './schemas/practice-session.schema';
-
-const STATUS_WEIGHT: Record<VocabStatus, number> = {
-  unknown: 3,
-  learning: 2,
-  known: 0,
-  ignored: -10,
-};
+import { STATUS_WEIGHT } from '../common/constants';
 
 function score(status: VocabStatus, frequency: number): number {
   return STATUS_WEIGHT[status] + frequency * 0.1;

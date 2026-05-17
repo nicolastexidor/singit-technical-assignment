@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
+import { VOCAB_STATUSES } from '../../common/constants';
 
 export type UserVocabularyDocument = HydratedDocument<UserVocabulary>;
 
@@ -21,7 +22,7 @@ export class UserVocabulary {
 
   @Prop({
     type: String,
-    enum: ['unknown', 'learning', 'known', 'ignored'],
+    enum: VOCAB_STATUSES,
     default: 'unknown',
   })
   status: VocabStatus;

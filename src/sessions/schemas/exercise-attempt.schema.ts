@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
 import { ExerciseType } from './practice-session.schema';
+import { EXERCISE_TYPES } from '../../common/constants';
 
 export type ExerciseAttemptDocument = HydratedDocument<ExerciseAttempt>;
 
@@ -23,7 +24,7 @@ export class ExerciseAttempt {
 
   @Prop({
     type: String,
-    enum: ['word_meaning', 'reverse_translation', 'word_to_image'],
+    enum: EXERCISE_TYPES,
     required: true,
   })
   exerciseType: ExerciseType;

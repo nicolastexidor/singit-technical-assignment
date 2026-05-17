@@ -3,20 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { UserVocabulary, UserVocabularyDocument, VocabStatus } from './schemas/user-vocabulary.schema';
 import { WordInsight, WordInsightDocument } from '../insights/schemas/word-insight.schema';
-
-/**
- * Priority score formula (higher = practice sooner):
- *   statusWeight + (frequency × 0.1) − recencyPenalty
- *
- * statusWeight:   unknown=3, learning=2, known=0, ignored=−10
- * recencyPenalty: min(hoursSinceLastPracticed / 24, 1.0)
- */
-const STATUS_WEIGHT: Record<VocabStatus, number> = {
-  unknown: 3,
-  learning: 2,
-  known: 0,
-  ignored: -10,
-};
+import { STATUS_WEIGHT } from '../common/constants';
 
 function priorityScore(status: VocabStatus, frequency: number, lastPracticedAt: Date | null): number {
   const recencyPenalty = lastPracticedAt
@@ -35,7 +22,7 @@ function recommendationReason(status: VocabStatus, incorrectCount: number): stri
 
 /**
  * Vocabulary state transition rules applied after each exercise attempt:
- *   correct:   unknown→learning, learning→known if correctCount≥2, known stays
+ *   correct:   unknown→learning, learning→known if correctCount≥3, known stays
  *   incorrect: known→learning, others stay
  */
 export function nextStatus(current: VocabStatus, isCorrect: boolean, newCorrectCount: number): VocabStatus {
