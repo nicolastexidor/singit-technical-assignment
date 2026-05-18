@@ -112,7 +112,7 @@ Unknown and learning words always surface before known ones. High-frequency word
 - **`reverse_translation`**: show a translation → pick the correct source word (4 options)
 - **`word_to_image`**: show the word → pick the correct image (4 options)
 
-Translation exercises are only generated when the requested `translationLanguage` exists on the insight. Image exercises require at least 4 words with `imageRefs` in the distractor pool. Distractors are drawn from other insights in the same language, sorted by frequency.
+Translation exercises are only generated when the requested `nativeLanguage` exists on the insight. Image exercises require at least 4 words with `imageRefs` in the distractor pool. Distractors are drawn from other insights in the same language, sorted by frequency.
 
 ### Sessions
 
@@ -120,7 +120,7 @@ Exercises are embedded inside the `practice_sessions` document — they are alwa
 
 ### Missing translations
 
-If a word has no translation in the requested `translationLanguage`, translation-based exercises are skipped for that word. The API returns `400` if this results in zero buildable exercises for the entire session.
+If a word has no translation in the requested `nativeLanguage`, translation-based exercises are skipped for that word. The API returns `400` if this results in zero buildable exercises for the entire session.
 
 ---
 
